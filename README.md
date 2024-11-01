@@ -1,97 +1,84 @@
-# Targomo TypeScript Coding Challenge
+# Targomo Full Stack Developer Assignment
 
-Dear candidate,
+**Author**: Roberto Zvjerkovic  
+**Company**: Targomo  
+**Position**: Full Stack Developer Assignment
 
-welcome to the Targomo TypeScript coding challenge. This challenge is both for applicants for a full-stack and front-end position. More on that later.
+This project was a fun one to work on! In this project, I integrated the frontend and backend and added new functionality to manage transit stops and lines. I ended up spending more time than the 6-hour guideline (around 10 hours), as I needed to refresh my skills with NgRx and hadn’t used Angular in a while. I also aimed to pack in a few extra features, which meant that I didn't get to fully implement application tests within the timeframe.
 
-## The Challenge
+## Features
 
-At Tagomo, we often deal with location data such as transport lines and combine them with insights form our [APIs](https://www.targomo.com/developers/apis/).
+### Backend API Updates
 
-For your challenge, we already put together a simple front-end application that shows the stops of a transit line on a map, together with a sidebar that lets the user select a single stop to see its details. It uses NgRx for state management and there is no backend involved.
+- Implemented API endpoints for deleting a transit stop and adding a new stop to a transit line.
 
-The full dataset contains more information than what is currently displayed in the application, it also holds information about the number of people getting on and of at each stop and pre calculated reachability values. You can find the full data in `src/constants/u9.ts`. The dataset consists of 19 stops of the following Model:
+### Frontend Enhancements
 
-| property                  | type    | description                                     |
-| ------------------------- | ------- | ----------------------------------------------- |
-| `id`                      | string  | id of the stop                                  |
-| `name`                    | string  | name of the stop                                |
-| `peopleOff`               | integer | number of people getting off at that stop       |
-| `peopleOn`                | integer | number of people getting on at that stop        |
-| `prevId`                  | string  | id of the previous stop                         |
-| `nextId`                  | string  | id of the next stop                             |
-| `reachablePopulationWalk` | integer | number of reachable population in 30 min (walk) |
-| `reachablePopulationBike` | integer | number of reachable population in 30 min (bike) |
-| `lat`                     | float   | latitude coordinate                             |
-| `lng`                     | float   | longitude coordinate                            |
+- **Details Component**: Displays relevant values of selected stops.
+- **Add Stop Component**: Allows the addition of a new stop after a specified reference stop is open in the details component.
+- **Map Highlighting**: Enables highlighting of selected stops on the map, in addition to highlighting on the sidebar.
+- **Map Layers**: Added a layer to visually connect stops with lines on the map.
+- **Delete Stop**: Implemented a feature for deleting a stop from the selected transit line.
 
-We would like you to extend this small web application, which can be enhanced with new features and user interactions.
+## How to Run the Project
 
-## Develop
+### Frontend
 
-1. clone the repo
-2. `npm install`
-3. create `.env` file with `MAPTILER_API_KEY={YOUR_PROVIDED_KEY}` variable
-4. `npm run serve`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rzvjerkovic/targomo-frontend/
+   ```
+2. Navigate to the frontend directory:
+   ```bash
+   cd targomo-frontend
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the frontend application:
+   ```bash
+   npm run start
+   ```
 
-## Backlog
+### Backend
 
-[There is a backlog of Tickets in this repo](https://github.com/targomo/typescript-challenge-frontend/issues). You can see this as an inspiration on what to do. The tickets are labelled with `frontend` and `fullstack` to indicate if we see this as a suitable ticket for front end or full stack candidates.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rzvjerkovic/targomo-backend/
+   ```
+2. Navigate to the backend directory:
+   ```bash
+   cd targomo-backend
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the backend server:
+   ```bash
+   npm run start
+   ```
 
-- **You should not** work on ALL of the tickets. Pick some that you find interesting and focus on them.
-- If you have a really good idea on what to do with this app and its not in the backlog, go ahead and do that!
+The frontend and backend should now be running, and the application can be accessed via the frontend.
 
-**For full stack applicants we have an additional repo, that adds a small back end service to the project [here](https://github.com/targomo/typescript-challenge-backend).** This repo also has some issues to suggest improvements. For full stack applicants issue [#3](https://github.com/targomo/typescript-challenge-frontend/issues/3) is mandatory.
+## Improvements and Future Work
 
-## Process
+### TODO
 
-To start the challenge just fork this repository (for full stack applicants also the back end repo) and commit your changes to your fork. As soon as you are finished, dont commit to your fork anymore and let us know. We will then review your results and get back to you as soon as possible.
+- **Shared Validation**: Implement Yup schemas for validation, ideally shared across frontend and backend within a shared library.
+- **Error Reporting**: Add comprehensive error reporting across the app.
+- **Local Storage Service**: Enhance the local storage service for more robustness and reusability; consider using NgRx Store local storage utilities.
+- **Dynamic Coloring**: Calculate and apply color-coding to line attributes based on average and standard deviation.
+- **Map Enhancements**: Resolve issues where map stop selection affects multiple lines and calculate averages across shared selections.
+- **Performance**: Improve the line generator's performance, assuming stops may be well ordered.
+- **Visual Differentiation**: Add unique coloring for each transit line to improve visual differentiation.
+- **Delete Confirmation**: Implement a confirmation modal for stop deletion.
+- **Store Management**: Add a separate section within the NgRx store for transit stops.
+- **Dropdown Filtering**: Filter lines in dropdown based on connectivity to the selected stop.
+- **Map Selector**: Add an option to select a new stop location directly on the map instead of via the form.
+- **Persist Reference**: Save the reference stop as a query parameter in the URL when adding a new stop.
+- **Exit Action**: Create a store action to handle form exit.
+- **Reusable UI Components**: Refactor aside UI components for reusability across multiple contexts.
 
-We expect you to work an absolute maximum of six hours on the challenge
-
-## Evaluation
-
-- We will consider the code quality and the number of features delivered (keep in mind that quality is better than quantity)
-- The projects are set up to meet our internal style guide (folder structure, best practises, lint etc) please follow the exsisting guidlines (pro tip: use prettier and run `npm run lint` regularly)
-- Unit tests are appreciated, but dont get stuck on them
-- You will receive our feedback not later than one week after you submit it
-
-## Next steps
-
-After you successfully completed the code challenge we would like to invite you for a meeting in person (or via video call) where we would get to know each other and take the opportunity to discuss your solution in detail.
-
-For questions or further clarification please don't hesitate to contact us.
-
-Sincerely,
-
-Your friends at Targomo
-
-TODO: - share Yup shemas between client and server
-
-- add error reporting
-
-- make a more robust and reusable local storage service
-
-  - use ngrx store local storage util?
-
-- calculate line attribute averages and color-code the values depending on the avg/sd - problem: map stop selection can select two or more lines at once (calculate average across both?)
-
-- deduplicate line rendering (lines are rendereded back and forth for each stop, making them double)
-
-  - improve line generator performance (can we assume line stops are well ordered?)
-
-- add different (line) coloring for each transit line
-
-- add confirm modal for deletion
-
-- add a separate transit stops section to ngrx store
-
-- filter available lines in the dropdown by which is connected to selected stop
-
-- add add new stop location selector on map instead of form
-
-- add reference stop as query parameter to "save" the add form
-
-- add store action for exiting form
-
-- make aside UI components reusable
+---
