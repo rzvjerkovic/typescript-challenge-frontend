@@ -65,3 +65,33 @@ For questions or further clarification please don't hesitate to contact us.
 Sincerely,
 
 Your friends at Targomo
+
+TODO: - share Yup shemas between client and server
+
+- add error reporting
+
+- make a more robust and reusable local storage service
+
+  - use ngrx store local storage util?
+
+- calculate line attribute averages and color-code the values depending on the avg/sd - problem: map stop selection can select two or more lines at once (calculate average across both?)
+
+- deduplicate line rendering (lines are rendereded back and forth for each stop, making them double)
+
+  - improve line generator performance (can we assume line stops are well ordered?)
+
+- add different (line) coloring for each transit line
+
+- add confirm modal for deletion
+
+- add a separate transit stops section to ngrx store
+
+- filter available lines in the dropdown by which is connected to selected stop
+
+- add add new stop location selector on map instead of form
+
+- add reference stop as query parameter to "save" the add form
+
+- add store action for exiting form
+
+- make aside UI components reusable

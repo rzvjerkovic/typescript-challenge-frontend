@@ -1,0 +1,43 @@
+<div class="add-stop-header">
+  <h1 class="title">Add a new Stop</h1>
+  <button mat-icon-button (click)="exitForm()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<mat-card>
+  <mat-card-title>Add New Stop</mat-card-title>
+  <form (ngSubmit)="onSubmit()" [formGroup]="stopForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Stop Name</mat-label>
+      <input matInput formControlName="name" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Latitude</mat-label>
+      <input type="number" matInput formControlName="lat" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Longitude</mat-label>
+      <input type="number" matInput formControlName="lng" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Stop position</mat-label>
+      <mat-select formControlName="position">
+        <mat-option value="after">After</mat-option>
+        <mat-option value="before">Before</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Transit line</mat-label>
+      <mat-select formControlName="lineId">
+        <mat-option value="u9">u9</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="stopForm.invalid">Add Stop</button>
+  </form>
+</mat-card>

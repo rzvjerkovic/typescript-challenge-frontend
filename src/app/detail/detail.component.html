@@ -5,6 +5,44 @@
   </button>
 </div>
 
-<span>Its very empty here (ಠ_ಠ)</span>
+@if (selectedStop()) {
+  <div class="attribute-grid">
+    <span class="line-attribute-label">Population walking distance</span>
 
-<!-- TODO add more info about the stop -->
+    <span class="line-attribute-value">
+      {{ selectedStop().reachablePopulationWalk }}
+    </span>
+
+    <span class="line-attribute-label">Population cycling distance</span>
+
+    <span class="line-attribute-value">
+      {{ selectedStop().reachablePopulationBike }}
+    </span>
+
+    <span class="line-attribute-label">Passengers entering the stop</span>
+
+    <span class="line-attribute-value">
+      {{ selectedStop().peopleOn }}
+    </span>
+
+    <span class="line-attribute-label">Passengers leaving the stop</span>
+
+    <span class="line-attribute-value">
+      {{ selectedStop().peopleOff }}
+    </span>
+  </div>
+  <div class="actions-panel">
+    <div>
+      <label mat-raised-button color="warn" (click)="onDelete()">Delete the stop</label>
+      <button mat-icon-button (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div>
+      <label mat-raised-button color="warn" (click)="onDelete()">Add a new stop</label>
+      <button mat-icon-button (click)="onAdd()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+}

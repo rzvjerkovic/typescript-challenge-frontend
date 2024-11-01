@@ -15,6 +15,10 @@ export namespace fromTransitLines {
     stops.find((stop) => stop.id === selStopId)
   )
 
+  export const loading = createSelector(transitLinesState, (state) => state.loading)
+
+  export const error = createSelector(transitLinesState, (state) => state.error)
+
   /**
    * Mapbox source for the locations
    */
@@ -41,9 +45,44 @@ export namespace fromTransitLines {
       }) as GeoJSONSourceSpecification
   )
 
-  // Issue https://github.com/targomo/typescript-challenge-frontend/issues/1
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  export const stopsLinesGeoJson = createSelector(selectAll, (lines) => {
-    return null
-  })
+  export const transitLinesGeoJson = createSelector(
+    selectAll,
+    (lines) =>
+      ({
+        type: 'geojson',
+        promoteId: '_id',
+        data: {
+          type: 'FeatureCollection',
+          features: lines
+            .map((line) => {
+              const connectors = []
+
+              let currentStop = line.stops.find((stop) => stop.prevId === null)
+              let counter = 0
+
+              while (currentStop.nextId || counter < 2) {
+                counter++
+                const nextStop = line.stops.find((stop) => stop.id === currentStop.nextId)
+                connectors.push({
+                  type: 'Feature',
+                  geometry: {
+                    type: 'LineString',
+                    coordinates: [
+                      [currentStop.lng, currentStop.lat],
+                      [nextStop.lng, nextStop.lat],
+                    ],
+                  },
+                  properties: {
+                    lineId: `${currentStop.id}-${nextStop.id}`,
+                  },
+                })
+                currentStop = nextStop
+              }
+
+              return connectors
+            })
+            .flat(),
+        },
+      }) as GeoJSONSourceSpecification
+  )
 }

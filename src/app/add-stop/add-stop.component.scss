@@ -4,7 +4,8 @@
   @include flex-column();
   gap: var(--default-gap);
   @include text();
-  .detail-header {
+
+  .add-stop-header {
     @include flex-row();
     @include flex-align(space-between);
     .title {
@@ -13,10 +14,5 @@
     button.mat-icon-button {
       margin: calc(-1 * var(--small-gap));
     }
-  }
-
-  .attribute-grid {
-    display: grid;
-    grid-template-columns: auto auto;
   }
 }
